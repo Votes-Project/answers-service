@@ -1,15 +1,20 @@
 import { join } from 'path';
 import AutoLoad, {AutoloadPluginOptions} from '@fastify/autoload';
 import { FastifyPluginAsync, FastifyServerOptions } from 'fastify';
+import { grafserv } from "postgraphile/grafserv/fastify/v4";
+import pgl from './pgl';
+export interface AppOptions extends FastifyServerOptions, Partial<AutoloadPluginOptions> {}
 
-export interface AppOptions extends FastifyServerOptions, Partial<AutoloadPluginOptions> {
-
-}
+const grafservInstance = pgl.createServ(grafserv);
 const app: FastifyPluginAsync<AppOptions> = async (
     fastify,
     opts
 ): Promise<void> => {
-  // Place here your custom code!
+
+  grafservInstance.addTo(fastify).catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
 
   // Do not touch the following lines
 
