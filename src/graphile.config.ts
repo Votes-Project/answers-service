@@ -7,6 +7,10 @@ import { makePgService } from "postgraphile/adaptors/pg";
 const preset: GraphileConfig.Preset = {
   extends: [PostGraphileAmberPreset, PostGraphileRelayPreset],
   pgServices: [makePgService({ connectionString: process.env.DATABASE_PRIVATE_URL })],
+  grafserv: {
+    graphqlPath: "/graphql",
+    graphiqlPath: "/graphiql"
+  }
 };
 
 export default preset;
