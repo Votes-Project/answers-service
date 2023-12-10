@@ -2,6 +2,7 @@ import "graphile-config";
 import "postgraphile";
 import { PostGraphileAmberPreset } from "postgraphile/presets/amber";
 import { PostGraphileRelayPreset } from "postgraphile/presets/relay";
+import { PgSimplifyInflectionPreset } from "@graphile/simplify-inflection";
 import { makePgService } from "postgraphile/adaptors/pg";
 
 const { DATABASE_URL } = process.env;
@@ -12,7 +13,7 @@ if (!DATABASE_URL) {
 }
 
 const preset: GraphileConfig.Preset = {
-  extends: [PostGraphileAmberPreset, PostGraphileRelayPreset],
+  extends: [PostGraphileAmberPreset, PostGraphileRelayPreset, PgSimplifyInflectionPreset ],
   pgServices: [makePgService({
     connectionString: DATABASE_URL,
     schemas: ["public"],
