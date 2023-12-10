@@ -13,7 +13,10 @@ if (!DATABASE_URL) {
 
 const preset: GraphileConfig.Preset = {
   extends: [PostGraphileAmberPreset, PostGraphileRelayPreset],
-  pgServices: [makePgService({ connectionString: DATABASE_URL })],
+  pgServices: [makePgService({
+    connectionString: DATABASE_URL,
+    schemas: ["public"],
+  })],
   grafserv: {
     graphqlPath: "/graphql",
     graphiqlPath: "/graphiql"
