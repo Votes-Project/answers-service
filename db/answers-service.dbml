@@ -51,13 +51,14 @@ Table answers {
 
 Table users {
     user_id bigserial [pk, increment]
+    linked boolean [not null, default: false, note: 'Has the user linked a key to BrightID?']
     verified boolean [not null, default: false, note: 'Has this user been verified as unique by BrightID?']
 }
 
 Table keys {
     key_id char(43) [pk, note: '''
-        A public key thumbprint anonymously connecting the user to a device or agent. Also used as a "contextId" in
-        BrightID. The keypair from which it originates is used for authenticating with the answers service.
+        A public key thumbprint anonymously connecting the user to a device or agent. Also used as a "contextId" to link
+        with BrightID. The keypair from which it originates is used for authenticating with the answers service.
         ''']
     user_id bigint [not null, ref: > users.user_id]
     Note: 'Keys used to authenticate users with the answers service.'
