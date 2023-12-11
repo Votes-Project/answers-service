@@ -23,9 +23,9 @@ Table total_points {
 }
 
 Table referrals {
-    from_id bigint [not null, ref: > users.user_id]
-    to_id bigint [not null, ref: > users.user_id]
-    day integer [not null, note: 'The day (since question 0) that the referral was used.']
+    from_id bigint [ref: > users.user_id]
+    to_id bigint [ref: > users.user_id]
+    day integer [note: 'The day (since question 0) that the referral was used.']
     Note: '''
         If the referred user is already verified, the referrer gains points. If the referred user becomes verified
         later, any referral link they used to answer a question will retroactively earn points for the referrer.
@@ -38,8 +38,8 @@ Table referrals {
 }
 
 Table answers {
-    user_id bigint [not null, ref: > users.user_id]
-    day integer [not null, note: 'The day of the question. The first question is day 0.']
+    user_id bigint [ref: > users.user_id]
+    day integer [note: 'The day of the question. The first question is day 0.']
     option smallint [not null, note: 'The option number of the answer.']
 
     indexes {
