@@ -40,7 +40,7 @@ Table referrals {
 Table answers {
     user_id bigint [ref: > users.user_id]
     day integer [note: 'The day of the question. The first question is day 0.']
-    option smallint [not null, note: 'The option number of the answer.']
+    option smallint [note: 'The option number of the answer. "null" means "none-of-the-above"']
 
     indexes {
         (user_id, day) [pk]
