@@ -4,7 +4,7 @@ Project answers_service {
 }
 
 Table points_this_period {
-    user_id bigint [unique, not null, ref: > users.user_id]
+    user_id bigint [pk, ref: - users.user_id]
     points integer [not null, default: 0]
     Note: "Points since the last raffle. Used to assign a user's probability of winning the next raffle."
 
@@ -14,7 +14,7 @@ Table points_this_period {
 }
 
 Table total_points {
-    user_id bigint [unique, not null, ref: > users.user_id]
+    user_id bigint [pk, ref: - users.user_id]
     points integer [not null, default: 0]
 
     indexes {
@@ -23,28 +23,21 @@ Table total_points {
 }
 
 Table referrals {
-    from_id bigint [ref: > users.user_id]
-    to_id bigint [ref: > users.user_id]
-    day integer [note: 'The day (since question 0) that the referral was used.']
+    to_id bigint [pk, ref: > users.user_id]
+    day integer [pk, note: 'The day (since question 0) that the referral was used.']
+    from_id bigint [not null, ref: > users.user_id]
     Note: '''
         If the referred user is already verified, the referrer gains points. If the referred user becomes verified
         later, any referral link they used to answer a question will retroactively earn points for the referrer.
     '''
-
-    indexes {
-        (from_id, to_id, day) [pk]
-        to_id
-    }
 }
 
 Table answers {
-    user_id bigint [ref: > users.user_id]
-    day integer [note: 'The day of the question. The first question is day 0.']
+    user_id bigint [pk, ref: > users.user_id]
+    day integer [pk, note: 'The day of the question. The first question is day 0.']
     option smallint [note: 'The option number of the answer. "null" means "none-of-the-above"']
 
     indexes {
-        (user_id, day) [pk]
-        user_id
         (day, option)
     }
 }
@@ -57,9 +50,13 @@ Table users {
 
 Table keys {
     key_id char(43) [pk, note: '''
-        A public key thumbprint anonymously connecting the user to a device or agent. Also used as a "contextId" to link
-        with BrightID. The keypair from which it originates is used for authenticating with the answers service.
+        A jwk thumbprint anonymously connecting the user to a device or agent. Also used as a "contextId" to link with
+        BrightID. The keypair from which it originates is used for authenticating with the answers service.
         ''']
     user_id bigint [not null, ref: > users.user_id]
     Note: 'Keys used to authenticate users with the answers service.'
+
+    indexes {
+        user_id
+    }
 }

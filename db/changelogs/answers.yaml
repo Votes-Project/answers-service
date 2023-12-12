@@ -26,11 +26,6 @@ databaseChangeLog:
             tableName: answers
             columns:
               - column:
-                  name: user_id
-        - createIndex:
-            tableName: answers
-            columns:
-              - column:
                   name: day
               - column:
                   name: option
