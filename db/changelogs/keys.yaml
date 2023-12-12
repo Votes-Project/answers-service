@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Adam Stallard
+      changes:
+        - createTable:
+            tableName: keys
+            columns:
+              - column:
+                  name: key_id
+                  type: char(43)
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    referencedTableName: users
+                    referencedColumnNames: user_id
+                    foreignKeyName: keys_user_id_fkey

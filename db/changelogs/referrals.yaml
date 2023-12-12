@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Adam Stallard
+      changes:
+        - createTable:
+            tableName: referrals
+            columns:
+              - column:
+                  name: from_id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    referencedTableName: users
+                    referencedColumnNames: user_id
+                    foreignKeyName: referrals_from_id_fkey
+              - column:
+                  name: to_id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    referencedTableName: users
+                    referencedColumnNames: user_id
+                    foreignKeyName: referrals_to_id_fkey
+              - column:
+                  name: day
+                  type: integer
+                  constraints:
+                    primaryKey: true
+
+        - createIndex:
+            tableName: referrals
+            columns:
+              - column:
+                  name: to_id
