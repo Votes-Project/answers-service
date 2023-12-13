@@ -16,6 +16,7 @@ const preset: GraphileConfig.Preset = {
   extends: [PostGraphileAmberPreset,
     PostGraphileRelayPreset,
     PgSimplifyInflectionPreset ],
+  disablePlugins: [ "PgIndexBehaviorsPlugin" ],
   pgServices: [makePgService({
     connectionString: DATABASE_URL,
     schemas: ["public"],
@@ -25,7 +26,7 @@ const preset: GraphileConfig.Preset = {
     graphiqlPath: "/graphiql"
   },
   schema: {
-    defaultBehavior: "-create -update -delete",
+    defaultBehavior: "-insert -update -delete",
   }
 };
 
