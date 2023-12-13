@@ -18,10 +18,6 @@ databaseChangeLog:
                     referencedTableName: users
                     referencedColumnNames: user_id
                     foreignKeyName: keys_user_id_fkey
-  - changeSet:
-      id: 2
-      author: Adam Stallard
-      changes:
         - createIndex:
             tableName: keys
             columns:
