@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: 5
+      id: 1
       author: Adam Stallard
       changes:
         - createTable:
