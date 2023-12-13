@@ -27,3 +27,12 @@ databaseChangeLog:
                     referencedTableName: users
                     referencedColumnNames: user_id
                     foreignKeyName: referrals_from_id_fkey
+  - changeSet:
+      id: 2
+      author: Adam Stallard
+      changes:
+        - createIndex:
+            tableName: referrals
+            columns:
+              - column:
+                  name: from_id
