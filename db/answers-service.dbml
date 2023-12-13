@@ -1,6 +1,6 @@
 Project answers_service {
+  Note: 'Answers, points, referrals, and user verification for Votes.'
   database_type: 'PostgreSQL'
-  Note: 'Answers, points, referrals, and user keys for Votes.'
 }
 
 Table points_this_period {
@@ -59,4 +59,13 @@ Table keys {
     indexes {
         user_id
     }
+}
+
+Table nonces {
+    user_id bigserial [pk, ref: > users.user_id]
+    nonce char(6) [pk]
+    Note: '''
+        Nonces are supplied in the JWT payload in the JWS protected header. They are stored and checked against reuse
+        to protect against replay attacks.
+    '''
 }
