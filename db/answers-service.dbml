@@ -1,6 +1,6 @@
 Project answers_service {
-  Note: 'Answers, points, referrals, and user verification for Votes.'
-  database_type: 'PostgreSQL'
+    Note: 'Answers, points, referrals, and user verification for Votes.'
+    database_type: 'PostgreSQL'
 }
 
 Table points_this_period {
