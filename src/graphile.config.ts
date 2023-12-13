@@ -13,7 +13,9 @@ if (!DATABASE_URL) {
 }
 
 const preset: GraphileConfig.Preset = {
-  extends: [PostGraphileAmberPreset, PostGraphileRelayPreset, PgSimplifyInflectionPreset ],
+  extends: [PostGraphileAmberPreset,
+    PostGraphileRelayPreset,
+    PgSimplifyInflectionPreset ],
   pgServices: [makePgService({
     connectionString: DATABASE_URL,
     schemas: ["public"],
@@ -21,6 +23,9 @@ const preset: GraphileConfig.Preset = {
   grafserv: {
     graphqlPath: "/graphql",
     graphiqlPath: "/graphiql"
+  },
+  schema: {
+    defaultBehavior: "-create -update -delete",
   }
 };
 
