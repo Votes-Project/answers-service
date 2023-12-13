@@ -13,7 +13,7 @@ Table points_this_period {
     }
 }
 
-Table total_points {
+Table points_total {
     user_id bigint [pk, ref: - users.user_id]
     points integer [not null, default: 0]
 

@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Adam Stallard
       changes:
         - createTable:
-            tableName: total_points
+            tableName: points_total
             columns:
               - column:
                   name: user_id
@@ -13,7 +13,7 @@ databaseChangeLog:
                     primaryKey: true
                     referencedTableName: users
                     referencedColumnNames: user_id
-                    foreignKeyName: total_points_user_id_fkey
+                    foreignKeyName: points_total_user_id_fkey
               - column:
                   name: points
                   type: integer
@@ -21,7 +21,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
         - createIndex:
-            tableName: total_points
+            tableName: points_total
             columns:
               - column:
                   name: points
